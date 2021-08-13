@@ -22,8 +22,8 @@ jobs:
         
       - name: Install everything i need
         run: |
-          apt install python3
-          apt install py3-pip
+          sudo apt install python
+          sudo apt install py-pip
           pip3 install pystache
           python3 --version
           pip3 install checkov
