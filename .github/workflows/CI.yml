@@ -144,6 +144,7 @@ jobs:
           
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
+    container: amazonlinux:latest
     name: Anchore image scanning
     steps:
     
