@@ -43,20 +43,10 @@ jobs:
     name: trivy config test job
     steps:          
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
         
-      - name: Run Trivy vulnerability scanner in IaC mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'config'
-          hide-progress: false
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          severity: 'CRITICAL,HIGH'
           
       - name: Run Trivy vulnerability scanner in repo mode
-        if: ${{ always() }}
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
@@ -64,7 +54,7 @@ jobs:
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
-          severity: 'CRITICAL'
+          severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results to GitHub Security tab
         if: ${{ always() }}
