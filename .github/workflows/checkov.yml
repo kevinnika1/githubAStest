@@ -28,12 +28,10 @@ jobs:
 
 
       - name: run and save checkov output
-        if: ${{ always() }}
         run:  |
-          checkov -d . -o sarif > checkovoutput.sarif
-          cat checkovoutput.sarif
-
+          checkov -d . 
  
       - name: hi
+        if: ${{ always() }}
         run: echo 'hi'
         
