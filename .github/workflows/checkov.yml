@@ -40,21 +40,24 @@ jobs:
   
   trivy-Config-job:
     runs-on: ubuntu-18.04
-    name: trivy config test job
+    name: trivy image scanning
     steps:          
       - name: Checkout repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         
+      - name: Build an image from Dockerfile
+        run: |
+          docker build ./pythonwebapp --tag flask-demo-container:${{ github.sha }}
           
-      - name: Run Trivy vulnerability scanner in repo mode
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          ignore-unfixed: true
-          severity: 'CRITICAL,HIGH'
+          image-ref: 'flask-demo-container:${{ github.sha }}'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
 
       - name: Upload Trivy scan results to GitHub Security tab
-        if: ${{ always() }}
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'trivy-results.sarif'
