@@ -20,11 +20,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@master
 
-      - name: Use Checkov
-        id: checkov
-        uses: bridgecrewio/checkov@master
-        
       - name: save checkov output
         run: | 
+          pip install checkov
           checkov -d . -o sarif > checkovoutput.sarif
         
