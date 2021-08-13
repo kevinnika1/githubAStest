@@ -30,7 +30,6 @@ jobs:
         if: ${{ always() }}
         run:  |
           > checkovoutput.sarif
-          cat checovoutput.sarif
           ls
           cd .. 
           ls
