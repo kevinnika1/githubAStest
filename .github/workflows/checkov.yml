@@ -1,4 +1,4 @@
-name: Checkov
+name: CI
 
 # Controls when the workflow will run
 on:
@@ -36,7 +36,12 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'checkovtest.sarif'
-          
+
+  
+  trivy-Config-job:
+    runs-on: ubuntu-latest
+    name: trivy config test job
+    steps:          
       - name: Run Trivy vulnerability scanner in IaC mode
         uses: aquasecurity/trivy-action@master
         with:
@@ -53,6 +58,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'trivy-results.sarif'
+  
           
         
         
