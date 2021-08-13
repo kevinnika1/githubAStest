@@ -19,9 +19,14 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@master
+        
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          output_format: sarif
 
       - name: save checkov output
         run: | 
-          pip3 install checkov
-          checkov -d . -o sarif > checkovoutput.sarif
+          > checkovoutput.sarif
         
