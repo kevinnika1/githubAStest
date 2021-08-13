@@ -22,11 +22,9 @@ jobs:
         
       - name: Install everything i need
         run: |
-          sudo apt install python
-          sudo apt install py-pip
-          pip3 install pystache
-          python3 --version
-          pip3 install checkov
+          sudo apt install python3.8
+          python --version
+          pip install checkov
 
 
       - name: run and save checkov output
