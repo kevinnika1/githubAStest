@@ -36,19 +36,23 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'checkovtest.sarif'
-
-  
-  trivy-Config-job:
-    runs-on: ubuntu-18.04
-    name: trivy image scanning
-    steps:          
+          
+  build-python-image:
+    runs-on: ubuntu-latest
+    name: build image prior to testing
+    steps: 
       - name: Checkout repo
         uses: actions/checkout@v2
         
       - name: Build an image from Dockerfile
         run: |
           docker build ./pythonwebapp --tag flask-demo-container:${{ github.sha }}
-          
+  
+  trivy-build-scan:
+    runs-on: ubuntu-18.04
+    name: trivy image scanning
+    needs: build-python-image
+    steps:    
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
@@ -61,6 +65,23 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'trivy-results.sarif'
+          
+  Anchore-Build-Scan:
+    runs-on: ubuntu-latest
+    name: Anchore image scanning
+    needs: build-python-image
+    steps:
+    - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
+      uses: anchore/scan-action@main
+      with:
+        image: "flask-demo-container:${{ github.sha }}"
+        acs-report-enable: true
+        
+    - name: Upload Anchore Scan Report
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: results.sarif
+
   
           
         
