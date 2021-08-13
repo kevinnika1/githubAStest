@@ -27,6 +27,9 @@ jobs:
           output_format: sarif
 
       - name: save checkov output
-        run: | 
+        run:  |
           > checkovoutput.sarif
+      
+      - name: hi
+        run: echo 'hi'
         
