@@ -22,19 +22,19 @@ jobs:
         
       - name: Install everything i need
         run: |
-           - apk add python3
-           - apk add py3-pip
-           - pip3 install pystache
-           - python3 --version
-           - pip3 install checkov
+          apk add python3
+          apk add py3-pip
+          pip3 install pystache
+          python3 --version
+          pip3 install checkov
 
 
       - name: run and save checkov output
         if: ${{ always() }}
         run:  |
-           - checkov -d . -o sarif > checkovoutput.sarif
-           - cat checkovoutput.sarif
-          
+          checkov -d . -o sarif > checkovoutput.sarif
+          cat checkovoutput.sarif
+
  
       - name: hi
         run: echo 'hi'
