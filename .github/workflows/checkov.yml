@@ -50,7 +50,7 @@ jobs:
         with:
           scan-type: 'config'
           hide-progress: false
-          format: 'template'
+          format: 'table'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           exit-code: '1'
