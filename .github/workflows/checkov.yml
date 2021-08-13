@@ -29,9 +29,13 @@ jobs:
 
       - name: run and save checkov output
         run:  |
-          checkov -d . 
+          checkov -d . -o sarif | tee checkovtest.sarif
  
-      - name: hi
+      - name: upload sarif results
         if: ${{ always() }}
-        run: echo 'hi'
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'checkovtest.sarif'
+          
+        
         
