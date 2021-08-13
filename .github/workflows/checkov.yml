@@ -42,6 +42,7 @@ jobs:
         with:
           scan-type: 'config'
           hide-progress: false
+          output: 'trivy-results.sarif'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
