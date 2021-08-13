@@ -37,22 +37,18 @@ jobs:
         with:
           sarif_file: 'checkovtest.sarif'
           
-  build-python-image:
+  trivy-build-scan:
     runs-on: ubuntu-latest
-    name: build image prior to testing
-    steps: 
+    name: trivy image scanning
+    steps:    
+    
       - name: Checkout repo
         uses: actions/checkout@v2
         
       - name: Build an image from Dockerfile
         run: |
           docker build ./pythonwebapp --tag flask-demo-container:${{ github.sha }}
-  
-  trivy-build-scan:
-    runs-on: ubuntu-18.04
-    name: trivy image scanning
-    needs: build-python-image
-    steps:    
+        
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
@@ -69,8 +65,15 @@ jobs:
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
     name: Anchore image scanning
-    needs: build-python-image
     steps:
+    
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    
+    - name: Build an image from Dockerfile
+      run: |
+          docker build ./pythonwebapp --tag flask-demo-container:${{ github.sha }}
+  
     - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
       uses: anchore/scan-action@main
       with:
