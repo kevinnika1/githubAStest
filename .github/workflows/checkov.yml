@@ -56,6 +56,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
           
       - name: Run Trivy vulnerability scanner in repo mode
+        if: ${{ always() }}
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
@@ -66,6 +67,7 @@ jobs:
           severity: 'CRITICAL'
 
       - name: Upload Trivy scan results to GitHub Security tab
+        if: ${{ always() }}
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'trivy-results.sarif'
