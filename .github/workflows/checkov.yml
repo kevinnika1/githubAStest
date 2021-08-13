@@ -42,6 +42,9 @@ jobs:
     runs-on: ubuntu-latest
     name: trivy config test job
     steps:          
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        
       - name: Run Trivy vulnerability scanner in IaC mode
         uses: aquasecurity/trivy-action@master
         with:
