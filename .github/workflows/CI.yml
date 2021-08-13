@@ -144,10 +144,12 @@ jobs:
           
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
-    container: amazonlinux:latest
     name: Anchore image scanning
     steps:
     
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      
     - name: Build an image from Dockerfile
       run: |
           docker build ./pythonwebapp --tag flask-demo-container:${{ github.sha }}
