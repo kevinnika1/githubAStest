@@ -50,7 +50,9 @@ jobs:
         with:
           scan-type: 'config'
           hide-progress: false
-          format: 'table'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
