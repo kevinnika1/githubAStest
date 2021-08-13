@@ -37,6 +37,13 @@ jobs:
         with:
           sarif_file: 'checkovtest.sarif'
           
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
   trivy-build-scan:
     runs-on: ubuntu-latest
     name: trivy image scanning
