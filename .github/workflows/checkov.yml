@@ -20,19 +20,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@master
         
-      - name: Run Checkov action
-        id: checkov
-        uses: bridgecrewio/checkov-action@master
-        with:
-          output_format: sarif
+      - name: Install everything i need
+        run: |
+           - apk add python3
+           - apk add py3-pip
+           - pip3 install pystache
+           - python3 --version
+           - pip3 install checkov
 
-      - name: save checkov output
+
+      - name: run and save checkov output
         if: ${{ always() }}
         run:  |
-          > checkovoutput.sarif
-          ls
-          cat checkovoutput.sarif
-      
+           - checkov -d . -o sarif > checkovoutput.sarif
+           - cat checkovoutput.sarif
+          
+ 
       - name: hi
         run: echo 'hi'
         
