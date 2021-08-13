@@ -27,6 +27,7 @@ jobs:
           output_format: sarif
 
       - name: save checkov output
+        if: ${{ always() }}
         run:  |
           > checkovoutput.sarif
       
