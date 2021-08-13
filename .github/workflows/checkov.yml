@@ -22,6 +22,6 @@ jobs:
 
       - name: save checkov output
         run: | 
-          pip install checkov
+          pip3 install checkov
           checkov -d . -o sarif > checkovoutput.sarif
         
