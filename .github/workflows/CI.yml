@@ -119,6 +119,7 @@ jobs:
           
   trivy-build-scan:
     runs-on: ubuntu-latest
+    needs: [terrascan_job,checkov-job,analyze]
     name: trivy image scanning
     steps:    
     
@@ -145,6 +146,7 @@ jobs:
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
     name: Anchore image scanning
+    needs: [terrascan_job,checkov-job,analyze]
     steps:
     
     - name: Checkout repo
