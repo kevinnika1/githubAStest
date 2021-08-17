@@ -77,14 +77,18 @@ jobs:
 
       - name: run and save checkov output
         run:  |
-          checkov -d . -o sarif | tee checkovtest.sarif
+          checkov -d ./pythonwebapp -o sarif | tee checkovtest.sarif
  
       - name: upload sarif results
         if: ${{ always() }}
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'checkovtest.sarif'
-          
+      
+  lint_job:
+    runs-on: ubuntu-latest
+    name: lint
+    steps:
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
