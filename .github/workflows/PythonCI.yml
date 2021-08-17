@@ -174,7 +174,22 @@ jobs:
       with:
         sarif_file: results.sarif
         
-  
+  Push-image: 
+    runs-on: ubuntu-latest
+    name: push image to ecr
+    needs: trivy-build-scan
+    steps:    
+      - name: Build an image from Dockerfile
+        run: echo "push to ecr"
+        
+  Deploy-image: 
+    runs-on: ubuntu-latest
+    name: deploy image in ecr to eks
+    needs: Push-image
+    steps:    
+      - name: Build an image from Dockerfile
+        run: echo "deploy ecr image in eks or trigger code pipeline to do so"
+          
           
         
         
