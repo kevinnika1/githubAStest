@@ -47,7 +47,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'node-demo-container:${{ github.sha }}'
-          exit-code: '1'
+          exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
