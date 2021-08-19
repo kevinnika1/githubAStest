@@ -30,7 +30,7 @@ jobs:
           checkov -d ./nodejs -o json
  
   trivy-build-scan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: always()
     needs: checkov-job
     name: trivy image scanning
