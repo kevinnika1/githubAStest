@@ -31,6 +31,7 @@ jobs:
  
   trivy-build-scan:
     runs-on: ubuntu-latest
+    if: ${{ always }}
     needs: checkov-job
     name: trivy image scanning
     steps:    
@@ -54,6 +55,7 @@ jobs:
           
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
+    if: ${{ always }}
     name: Anchore image scanning
     needs: checkov-job
     steps:
