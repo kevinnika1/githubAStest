@@ -39,20 +39,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         
-      - name: Install everything i need
-        run: |
-          wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
-          sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
-        
       - name: Build an image from Dockerfile
         run: |
           docker build ./nodejs --tag node-demo-container:${{ github.sha }}
           
-        
       - name: Run Trivy vulnerability scanner
-        run: |
-          trivy image --format template --template "sarif.tpl" -o report.sarif node-demo-container:${{ github.sha }}
-
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'node-demo-container:${{ github.sha }}'
+          format: 'template'
+          template: 'sarif.tpl'
+          output: 'report.sarif'
+          
       - name: Upload Trivy scan results to GitHub Security tab
         if: always()
         uses: github/codeql-action/upload-sarif@v1
