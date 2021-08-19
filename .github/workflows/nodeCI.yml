@@ -54,10 +54,7 @@ jobs:
       - name: check files
         run: |
           ls
-          cd .. 
-          ls 
-          cd .. 
-          ls
+          cat report.sarif
           
       #- name: Upload Trivy scan results to GitHub Security tab
       #  if: always()
