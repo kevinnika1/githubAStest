@@ -44,12 +44,13 @@ jobs:
           docker build ./nodejs --tag node-demo-container:${{ github.sha }}
           
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: anandg112/trivy-action@feat/add-skip-dirs-option
         with:
           image-ref: 'node-demo-container:${{ github.sha }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'report.sarif'
+          
           
       - name: check files
         run: |
