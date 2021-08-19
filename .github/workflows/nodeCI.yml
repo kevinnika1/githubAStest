@@ -51,7 +51,7 @@ jobs:
         
       - name: Run Trivy vulnerability scanner
         run: |
-          trivy image --format template --template "@contrib/sarif.tpl" -o report.sarif node-demo-container:${{ github.sha }}
+          trivy image --format template --template "sarif.tpl" -o report.sarif node-demo-container:${{ github.sha }}
 
       - name: Upload Trivy scan results to GitHub Security tab
         if: always()
