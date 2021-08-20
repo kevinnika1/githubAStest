@@ -165,15 +165,15 @@ jobs:
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           
-      - name: check sarif file
-        run: | 
-          ls 
-          cat trivy-results.sarif
+   #   - name: check sarif file
+   #     run: | 
+   #       ls 
+   #       cat trivy-results.sarif
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: 'trivy-results.sarif'
+   #   - name: Upload Trivy scan results to GitHub Security tab
+   #     uses: github/codeql-action/upload-sarif@v1
+   #     with:
+   #       sarif_file: 'trivy-results.sarif'
           
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
