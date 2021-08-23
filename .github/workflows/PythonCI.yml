@@ -67,9 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
+    
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
@@ -79,6 +77,7 @@ jobs:
         args: >
           -Dsonar.organization=kevinnika1
           -Dsonar.projectKey=kevinnika1_githubAStest
+          -Dsonar.sources=./pythonwebapp
       
   checkov-job:
     runs-on: ubuntu-latest
