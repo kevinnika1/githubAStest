@@ -49,19 +49,19 @@ jobs:
           image-ref: 'node-demo-container:${{ github.sha }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
-          output: 'report.sarif'
+          output: 'report.sarif.json'
           
           
       - name: check files
         run: |
           ls
-          cat report.sarif
+          cat report.sarif.json
           
       - name: Upload Trivy scan results to GitHub Security tab
         if: always()
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: 'report.sarif'
+          sarif_file: 'report.sarif.json'
           
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
