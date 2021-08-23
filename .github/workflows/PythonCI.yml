@@ -78,7 +78,6 @@ jobs:
           -Dsonar.organization=kevinnika1
           -Dsonar.projectKey=kevinnika1_githubAStest
           -Dsonar.sources=./pythonwebapp
-          -Dsonar.verbose=true
           -Dsonar.python.coverage.reportPaths=coverage.xml
       
   checkov-job:
