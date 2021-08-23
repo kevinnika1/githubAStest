@@ -79,6 +79,15 @@ jobs:
           -Dsonar.projectKey=kevinnika1_githubAStest
           -Dsonar.sources=./pythonwebapp
           -Dsonar.python.coverage.reportPaths=coverage.xml
+          
+    - name: check sarif file
+      run: | 
+          ls 
+          cd pythonwebapp
+          ls
+          cd ..
+          cd ..
+          ls
       
   checkov-job:
     runs-on: ubuntu-latest
