@@ -2,7 +2,7 @@ import json
 
 try:
 
-    with open('report.json') as json_file:
+    with open('trivy-results.json') as json_file:
         data = json.load(json_file)
         
         
@@ -14,7 +14,14 @@ try:
                 thisdict= {}
                 thisdict['path']=path
                 thisdict['message']=str("Installed version: "+v.get('InstalledVersion')+", Fixed Version: "+v.get('FixedVersion'))
-                thisdict['level']=v.get('Severity')
+                
+                if (v['Severity']=="UNKNOWN" or v['Severity']=="MEDIUM" or v['Severity']=="LOW"):
+                    thisdict['level']="notice"
+                elif (v['Severity']=="HIGH"):
+                    thisdict['level']="warning"
+                elif (v['Severity']=="CRITICAL"):
+                    thisdict['level']="failure"
+                    
                 thisdict['line']=0
                 if ("Title" in v):
                     thisdict['title']=str(v.get('VulnerabilityID')+", "+v.get('Title'))
