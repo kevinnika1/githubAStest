@@ -48,19 +48,19 @@ jobs:
         with:
           image-ref: 'node-demo-container:${{ github.sha }}'
           format: 'json'
-          output: 'report.json'
+          output: 'trivy-results.json'
           
           
       - name: check files
         run: |
           ls
-          cat report.json
+          cat trivy-results.json
           
       - name: Upload trviy results
         uses: actions/upload-artifact@v2
         with:
           name: Conatiner VM results
-          path: report.json
+          path: trivy-results.json
           
       - name: Parse Trivy JSON output
         run: |
