@@ -24,7 +24,7 @@ try:
                 if ("Title" in v):
                     thisdict['title']=str(v.get('VulnerabilityID')+", "+v.get('Title')+", "+"Severity: "+v.get('Severity'))
                 else:
-                    thisdict['title']=v.get('VulnerabilityID'+", Severity: "+v.get('Severity'))
+                    thisdict['title']=str(v.get('VulnerabilityID')+", Severity: "+v.get('Severity'))
                 result.append(thisdict)
 
     with open("trivyparsedresults.json", "w") as outfile:
