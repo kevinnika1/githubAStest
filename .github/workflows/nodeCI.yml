@@ -56,6 +56,12 @@ jobs:
           ls
           cat report.json
           
+      - name: Upload trviy results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Conatiner VM results
+          path: report.json
+          
    #   - name: Upload Trivy scan results to GitHub Security tab
    #     if: always()
    #     uses: github/codeql-action/upload-sarif@v1
