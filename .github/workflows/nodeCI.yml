@@ -47,21 +47,20 @@ jobs:
         uses: anandg112/trivy-action@feat/add-skip-dirs-option
         with:
           image-ref: 'node-demo-container:${{ github.sha }}'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
-          output: 'report.sarif.json'
+          format: 'json'
+          output: 'report.json'
           
           
       - name: check files
         run: |
           ls
-          cat report.sarif.json
+          cat report.json
           
-      - name: Upload Trivy scan results to GitHub Security tab
-        if: always()
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: 'report.sarif.json'
+   #   - name: Upload Trivy scan results to GitHub Security tab
+   #     if: always()
+   #     uses: github/codeql-action/upload-sarif@v1
+   #     with:
+   #       sarif_file: 'report.sarif.json'
           
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
