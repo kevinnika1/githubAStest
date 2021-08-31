@@ -73,6 +73,7 @@ jobs:
             repo-token: "${{ secrets.GITHUB_TOKEN }}"
             title: 'Trivy Results'
             input: './trivyparsedresults.json'
+            ignore-unauthorized-error: 'true'
           
    #   - name: Upload Trivy scan results to GitHub Security tab
    #     if: always()
