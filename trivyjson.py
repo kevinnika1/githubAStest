@@ -15,6 +15,7 @@ try:
                 thisdict['path']=path
                 thisdict['message']=str("Installed version: "+v.get('InstalledVersion')+", Fixed Version: "+v.get('FixedVersion'))
                 thisdict['level']=v.get('Severity')
+                thisdict['line']=0
                 if ("Title" in v):
                     thisdict['title']=str(v.get('VulnerabilityID')+", "+v.get('Title'))
                 else:
